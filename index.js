@@ -22,13 +22,13 @@ function createBot(token, index) {
     let isConnected = false;
     let timeout;
 
-    const nickname = `⋆⋆⋆⋆⋆`; // สร้างชื่อเล่นแบบ winter-{index}
+    // const nickname = `⋆⋆⋆⋆⋆`; // สร้างชื่อเล่นแบบ winter-{index}
 
     client.on('ready', () => {
         console.log(`Logged in as ${client.user.tag}`);
         connectToVoiceChannel();
         monitorVoiceState();
-        changeNickname(nickname);  // เปลี่ยนชื่อเล่นสำหรับแต่ละบอท
+        // changeNickname(nickname);  // เปลี่ยนชื่อเล่นสำหรับแต่ละบอท
     });
 
     function monitorVoiceState() {
@@ -107,21 +107,21 @@ function createBot(token, index) {
     }
 
     // ฟังก์ชันเปลี่ยนชื่อเล่น
-    function changeNickname(nickname) {
-        const guild = client.guilds.cache.get(GUILD_ID);
-        if (!guild) return;
+//     function changeNickname(nickname) {
+//         const guild = client.guilds.cache.get(GUILD_ID);
+//         if (!guild) return;
 
-        const member = guild.members.cache.get(client.user.id);
-        if (member) {
-            member.setNickname(nickname)
-                .then(() => console.log(`${client.user.tag}: เปลี่ยนชื่อเล่นเป็น ${nickname}`))
-                .catch(console.error);
-        }
-    }
+//         const member = guild.members.cache.get(client.user.id);
+//         if (member) {
+//             member.setNickname(nickname)
+//                 .then(() => console.log(`${client.user.tag}: เปลี่ยนชื่อเล่นเป็น ${nickname}`))
+//                 .catch(console.error);
+//         }
+//     }
 
-    client.login(token);
-    bots.push({ client, ws, isConnected });
-}
+//     client.login(token);
+//     bots.push({ client, ws, isConnected });
+// }
 
 // สร้างบอทใหม่ตามจำนวน token ที่มี พร้อม index สำหรับชื่อเล่น
 TOKENS.forEach((token, index) => {
