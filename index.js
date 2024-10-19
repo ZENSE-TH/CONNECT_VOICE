@@ -13,7 +13,7 @@ const RECONNECT_INTERVAL = 60000; // 60 วินาที
 
 let bots = [];
 
-function createBot(token, index) {
+function createBot(token) {
     const client = new Client({
         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES]
     });
@@ -22,13 +22,10 @@ function createBot(token, index) {
     let isConnected = false;
     let timeout;
 
-    // const nickname = `⋆⋆⋆⋆⋆`; // สร้างชื่อเล่นแบบ winter-{index}
-
     client.on('ready', () => {
         console.log(`Logged in as ${client.user.tag}`);
         connectToVoiceChannel();
         monitorVoiceState();
-        // changeNickname(nickname);  // เปลี่ยนชื่อเล่นสำหรับแต่ละบอท
     });
 
     function monitorVoiceState() {
@@ -106,24 +103,11 @@ function createBot(token, index) {
         }
     }
 
-    // ฟังก์ชันเปลี่ยนชื่อเล่น
-//     function changeNickname(nickname) {
-//         const guild = client.guilds.cache.get(GUILD_ID);
-//         if (!guild) return;
+    client.login(token);
+    bots.push({ client, ws, isConnected });
+}
 
-//         const member = guild.members.cache.get(client.user.id);
-//         if (member) {
-//             member.setNickname(nickname)
-//                 .then(() => console.log(`${client.user.tag}: เปลี่ยนชื่อเล่นเป็น ${nickname}`))
-//                 .catch(console.error);
-//         }
-//     }
-
-//     client.login(token);
-//     bots.push({ client, ws, isConnected });
-// }
-
-// สร้างบอทใหม่ตามจำนวน token ที่มี พร้อม index สำหรับชื่อเล่น
-TOKENS.forEach((token, index) => {
-    createBot(token, index);
+// สร้างบอทใหม่ตามจำนวน token ที่มี
+TOKENS.forEach((token) => {
+    createBot(token);
 });
