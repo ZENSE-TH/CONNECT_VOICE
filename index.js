@@ -80,7 +80,7 @@ function createBot(token) {
                     d: {
                         guild_id: GUILD_ID,
                         channel_id: TARGET_VOICE_CHANNEL_ID,
-                        self_mute: true,
+                        self_mute: false,
                         self_deaf: true
                     }
                 };
